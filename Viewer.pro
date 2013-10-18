@@ -14,8 +14,10 @@ QML_IMPORT_PATH =
 # MOBILITY +=
 
 # The .cpp file which was generated for your project. Feel free to hack it.
-HEADERS += viewer.h
-SOURCES += viewer.cpp main.cpp
+HEADERS += viewer.h \
+    ctmdroparea.h
+SOURCES += viewer.cpp main.cpp \
+    ctmdroparea.cpp
 
 # Installation path
 # target.path =

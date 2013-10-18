@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import ctmdroparea 1.0
 
 Rectangle {
     width: 360
@@ -9,18 +10,23 @@ Rectangle {
         anchors.centerIn: parent
     }
 
-    DropArea {
-        anchors.fill: parent
+    CTMDropArea {
+        x: 60; y: 60
+        width: 120; height: 120
         onDropped: console.log("dropped")
-        onEntered: console.log("entered")
+//        onEntered: console.log("entered")
+
+        Rectangle {
+            color: "green"
+            anchors.fill: parent
+            visible: parent.containsDrag
+        }
     }
 
-
+    //http://stackoverflow.com/questions/7618307/drag-and-drop-in-qml
     Rectangle {
-        width: 30
-        height: 30
-        x: 30
-        y: 30
+        width: 130; height: 130
+        x: 130; y: 130
         color: "red"
 
         Drag.active: dragArea.drag.active
@@ -28,9 +34,9 @@ Rectangle {
         Drag.hotSpot.y: 15
         MouseArea {
             id: dragArea
-            anchors.fill:parent
-            drag.target:parent
-            onReleased:Drag.drop()
+            anchors.fill: parent
+            onReleased: parent.Drag.drop()
+            drag.target: parent
         }
     }
 
