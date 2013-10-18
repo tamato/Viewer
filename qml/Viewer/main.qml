@@ -13,7 +13,9 @@ Rectangle {
     CTMDropArea {
         x: 60; y: 60
         width: 120; height: 120
-        onDropped: console.log("dropped")
+        acceptingDrops: true
+//        onTextDrop: console.log("test")
+   //     onDropped: console.log("dropped")
 //        onEntered: console.log("entered")
 
         Rectangle {

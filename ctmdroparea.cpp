@@ -7,12 +7,12 @@
 
 // http://qt-project.org/doc/qt-5.1/qtgui/dnd.html
 // http://qt-project.org/doc/qt-5.1/qtgui/qdropevent.html
+// https://qt-project.org/doc/qt-5.1/qtquick/qml-qtquick2-droparea.html
 
 CTMDropArea::CTMDropArea(QQuickItem *parent) :
     QQuickItem(parent)
-  , AcceptingDrops(true)
+  , AcceptingDrops(false)
 {
-    setAcceptingDrops(AcceptingDrops);
 }
 
 bool CTMDropArea::isAcceptingDrops() const
@@ -22,6 +22,7 @@ bool CTMDropArea::isAcceptingDrops() const
 
 void CTMDropArea::dragEnterEvent(QDragEnterEvent *event)
 {
+    qDebug() << "Drag Event";
     event->acceptProposedAction();
 }
 
@@ -31,13 +32,14 @@ void CTMDropArea::dragLeaveEvent(QDragLeaveEvent *event)
 
 void CTMDropArea::dragMoveEvent(QDragMoveEvent *event)
 {
+    qDebug() << "Move Event";
     event->acceptProposedAction();
 }
 
 void CTMDropArea::dropEvent(QDropEvent *event)
 {
-    emit textDrop(event->mimeData()->text());
     qDebug() << "Drop recieved: " << event->mimeData()->text();
+    emit textDrop(event->mimeData()->text());
     event->acceptProposedAction();
 }
 
@@ -46,7 +48,7 @@ void CTMDropArea::setAcceptingDrops(bool accepting)
     if (accepting == AcceptingDrops)
                 return;
 
+    setFlag(QQuickItem::ItemAcceptsDrops, true);
     AcceptingDrops = accepting;
-    setAcceptingDrops(AcceptingDrops);
     emit acceptingDropsChanged();
 }
