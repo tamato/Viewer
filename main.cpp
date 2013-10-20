@@ -1,16 +1,15 @@
 #include <QtGui/QGuiApplication>
-#include <QQmlApplicationEngine>
-#include <QQmlComponent>
+#include <QtQuick/QQuickView>
 #include "qtquick2applicationviewer.h"
-
-#include "ctmdroparea.h"
+#include <QtDebug>  // qDebug()
+#include "viewer.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    // first arg: what to improt in qml file to get access to QML object.
+    // first arg: what to import in qml file to get access to QML object.
     // fourth arg: QML object name.
-    qmlRegisterType<CTMDropArea>("ctmdroparea", 1, 0, "CTMDropArea");
+    qmlRegisterType<Viewer>("meshviewer", 1, 0, "MeshViewer");
 
     QtQuick2ApplicationViewer viewer;
     viewer.setMainQmlFile(QStringLiteral("qml/Viewer/main.qml"));

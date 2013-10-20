@@ -1,27 +1,16 @@
 import QtQuick 2.0
-import ctmdroparea 1.0
+import meshviewer 1.0
 
-Rectangle {
+MeshViewer {
     width: 360
     height: 360
 
-    Text {
-        text: qsTr("Hello World")
-        anchors.centerIn: parent
-    }
-
-    CTMDropArea {
-        x: 60; y: 60
-        width: 120; height: 120
-        acceptingDrops: true
-//        onTextDrop: console.log("test")
-   //     onDropped: console.log("dropped")
-//        onEntered: console.log("entered")
-
-        Rectangle {
-            color: "green"
-            anchors.fill: parent
-            visible: parent.containsDrag
+    // http://qt-project.org/doc/qt-5.0/qtquick/qtquick-input-focus.html
+    focus: true
+    Keys.onPressed: {
+        if (event.key == Qt.Key_Escape) {
+            Qt.quit()
+            event.accepted = true
         }
     }
 
@@ -41,16 +30,4 @@ Rectangle {
             drag.target: parent
         }
     }
-
-//    MouseArea {
-
-//        id: dragArea
-//        anchors.fill: parent
-//        drag.target: parent
-//        onReleased: Drag.drop()
-
-//        onClicked: {
-//            //Qt.quit();
-//        }
-//    }
 }

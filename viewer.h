@@ -4,26 +4,28 @@
 #include <QQuickItem>
 #include <QtGui/QOpenGLShaderProgram>
 
-class viewer : public QQuickItem
+class Viewer : public QQuickItem
 {
     Q_OBJECT
-    //Q_PROPERTY(qreal t READ t WRITE setT NOTIFY tChanged)
+
 public:
-    explicit viewer(QQuickItem *parent = 0);
-    
+    explicit Viewer(QQuickItem *parent = 0);
+
 signals:
-    
+
 public slots:
     void paint();
     void cleanup();
     void sync();
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dragMoveEvent(QDragMoveEvent *event);
+    void dropEvent(QDropEvent *event);
+
+private slots:
+    void handleWindowChanged(QQuickWindow *win);
 
 private:
-    QOpenGLShaderProgram *m_program;
-
-    qreal m_t;
-    qreal m_thread_t;
-
+    QOpenGLShaderProgram *Program;
 };
 
 #endif // VIEWER_H
